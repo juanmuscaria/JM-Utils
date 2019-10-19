@@ -5,11 +5,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 /**
- * @author juanmuscaria
  * This class will be an abstraction to be able to access things that need to be implemented on specific platforms.
+ *
+ * @author juanmuscaria
  */
 public final class Implementations {
     private static UserIdent userIdentImp;
+
+    //Seal class.
+    private Implementations() {
+    }
 
     /**
      * Register an implementation of UserIndent before using it.
@@ -30,7 +35,7 @@ public final class Implementations {
      */
     @NotNull
     public static UserIdent getUserIdentImp() {
-        if (userIdentImp == null) throw new IllegalStateException();
+        if (userIdentImp == null) throw new IllegalStateException("No implementation has been registered yet.");
         return userIdentImp;
     }
 }

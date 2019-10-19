@@ -4,20 +4,15 @@ import com.mojang.authlib.GameProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
- * @author juanmuscaria
  * A class to represent a player, it must be immutable.
  * It was based on EnderIO UserIdent https://github.com/SleepyTrousers/EnderIO/blob/release/1.7.10/2.3/src/main/java/crazypants/util/UserIdent.java
+ *
+ * @author juanmuscaria
  */
 public abstract class UserIdent {
-
-    public static @NotNull
-    UUID offlineUUID(String playerName) {
-        return UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes(StandardCharsets.UTF_8));
-    }
 
     /**
      * Create a UserIdent from a UUID object and a name. Use this when reading
@@ -28,8 +23,8 @@ public abstract class UserIdent {
      * @param playerName The name of the player.
      * @return An instance of UserIdent containing player data, if the given data is invalid, returns a Nobody UserIdent.
      */
-    public abstract @NotNull
-    UserIdent create(@Nullable UUID uuid, @Nullable String playerName);
+    @NotNull
+    public abstract UserIdent create(@Nullable UUID uuid, @Nullable String playerName);
 
     /**
      * Create a UserIdent from a UUID string and a name. Use this when reading
@@ -40,8 +35,8 @@ public abstract class UserIdent {
      * @param playerName The name of the player.
      * @return An instance of UserIdent containing player data, if the given data is invalid, returns a Nobody UserIdent.
      */
-    public abstract @NotNull
-    UserIdent create(@NotNull String suuid, @Nullable String playerName);
+    @NotNull
+    public abstract UserIdent create(@NotNull String suuid, @Nullable String playerName);
 
     /**
      * Create a UserIdent from a GameProfile. Use this when creating a UserIdent
@@ -50,32 +45,32 @@ public abstract class UserIdent {
      * @param gameProfile The Player's GameProfile.
      * @return An instance of UserIdent containing player data, if the given data is invalid, returns a Nobody UserIdent.
      */
-    public abstract @NotNull
-    UserIdent create(@Nullable GameProfile gameProfile);
+    @NotNull
+    public abstract UserIdent create(@Nullable GameProfile gameProfile);
 
     /**
      * Get the player's name stored in this object.
      *
      * @return The name of the player.
      */
-    public abstract @NotNull
-    String getPlayerName();
+    @NotNull
+    public abstract String getPlayerName();
 
     /**
      * Get the player's UUID stored in this object.
      *
      * @return The UUID of the player.
      */
-    public abstract @NotNull
-    UUID getUUID();
+    @NotNull
+    public abstract UUID getUUID();
 
     /**
      * Get the player's UUID stored in this object.
      *
      * @return The UUID of the player as String.
      */
-    public abstract @NotNull
-    String getUUIDString();
+    @NotNull
+    public abstract String getUUIDString();
 
     /**
      * Checks if an NBTTagCompound contains a UserIndent.
@@ -101,8 +96,8 @@ public abstract class UserIdent {
      * @param prefix The prefix used to save the data in the tag.
      * @return An instance of UserIdent containing player data, if the given data is invalid, returns a Nobody UserIdent.
      */
-    public abstract @NotNull
-    UserIdent readFromNbt(@NotNull Object nbt, @NotNull String prefix);
+    @NotNull
+    public abstract UserIdent readFromNbt(@NotNull Object nbt, @NotNull String prefix);
 
     /**
      * @return True if the implementation supports actions using NBTTag
