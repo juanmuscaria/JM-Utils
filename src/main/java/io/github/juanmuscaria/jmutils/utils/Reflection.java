@@ -1,7 +1,5 @@
 package io.github.juanmuscaria.jmutils.utils;
 
-import sun.reflect.CallerSensitive;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -257,7 +255,6 @@ public final class Reflection {
      * @param name Full class name (eg. package.ClassName).
      * @return True if the class exists.
      */
-    @CallerSensitive
     public static boolean doesClassExist(String name) {
         try {
             Class c = Class.forName(name);
