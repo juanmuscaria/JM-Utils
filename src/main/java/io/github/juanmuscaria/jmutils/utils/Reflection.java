@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  * A set of utilities to help with Reflection.
- * Made based on https://github.com/dmulloy2/ProtocolLib/blob/gradle/TinyProtocol/src/main/java/com/comphenix/tinyprotocol/Reflection.java
+ * Based on {@link <a href="https://github.com/dmulloy2/ProtocolLib/blob/gradle/TinyProtocol/src/main/java/com/comphenix/tinyprotocol/Reflection.java">ProtocolLib Reflection</a>}.
  *
  * @author juanmuscaria
  */
@@ -226,7 +226,7 @@ public final class Reflection {
      *
      * @param lookupName - the class name with variables.
      * @return The class.
-     * @see {@link #getClass()} for more information.
+     * @see #getClass(String) for more information.
      */
     public static Class<Object> getUntypedClass(String lookupName) {
         @SuppressWarnings({"rawtypes", "unchecked"})
@@ -237,7 +237,7 @@ public final class Reflection {
     /**
      * Retrieve a class from its full name.
      *
-     * @param lookupName - the class name with variables.
+     * @param lookupName - the class name.
      * @return The looked up class.
      * @throws IllegalArgumentException If a variable or class could not be found.
      */
@@ -250,10 +250,10 @@ public final class Reflection {
     }
 
     /**
-     * Checks if a class exists;
+     * Checks if a class exists.
      *
-     * @param name Full class name (eg. package.ClassName).
-     * @return True if the class exists.
+     * @param name the class name.
+     * @return true if the class exists.
      */
     public static boolean doesClassExist(String name) {
         try {

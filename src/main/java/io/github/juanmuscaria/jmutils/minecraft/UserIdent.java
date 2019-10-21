@@ -8,7 +8,7 @@ import java.util.UUID;
 
 /**
  * A class to represent a player, it must be immutable.
- * It was based on EnderIO UserIdent https://github.com/SleepyTrousers/EnderIO/blob/release/1.7.10/2.3/src/main/java/crazypants/util/UserIdent.java
+ * Based on {@link <a href="https://github.com/SleepyTrousers/EnderIO/blob/release/1.7.10/2.3/src/main/java/crazypants/util/UserIdent.java">EnderIO UserIdent</a>}.
  *
  * @author juanmuscaria
  */
