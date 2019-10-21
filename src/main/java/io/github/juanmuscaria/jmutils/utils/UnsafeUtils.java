@@ -105,9 +105,15 @@ public final class UnsafeUtils {
          * Must be called when this object is no longer used.
          */
         public void freeMemory() {
-            if (!isFinalized.get()) unsafeAccessor.get(null).freeMemory(baseAddress);
+            if (!isFinalized.get()) {
+                unsafeAccessor.get(null).freeMemory(baseAddress);
+                isFinalized.set(true);
+            }
         }
 
+        public long getAddress(){
+            return baseAddress;
+        }
         private void checkBounds(long index) {
             if (index < 0 || index > (size - 1)) throw new ArrayIndexOutOfBoundsException("index " + index);
         }
@@ -115,7 +121,6 @@ public final class UnsafeUtils {
         @Override
         protected void finalize() {
             if (!isFinalized.get()) {
-                isFinalized.set(true);
                 freeMemory();
             }
         }

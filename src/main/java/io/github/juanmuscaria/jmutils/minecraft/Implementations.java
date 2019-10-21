@@ -1,5 +1,6 @@
 package io.github.juanmuscaria.jmutils.minecraft;
 
+import io.github.juanmuscaria.jmutils.utils.Reflection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -38,4 +39,25 @@ public final class Implementations {
         if (userIdentImp == null) throw new IllegalStateException("No implementation has been registered yet.");
         return userIdentImp;
     }
+
+    public static boolean hasForge(){
+        return Reflection.doesClassExist("net.minecraftforge.common.ForgeVersion");
+    }
+
+    public static boolean hasMCPCPlus(){
+        return Reflection.doesClassExist("za.co.mcportcentral.MCPCHooks");
+    }
+
+    public static boolean hasCauldron(){
+        return Reflection.doesClassExist("net.minecraftforge.cauldron.CauldronUtils");
+    }
+
+    public static boolean hasThermos(){
+        return Reflection.doesClassExist("thermos.Thermos");
+    }
+
+    public static boolean hasBukkit(){
+        return Reflection.doesClassExist("org.bukkit.Bukkit");
+    }
+
 }
