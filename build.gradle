@@ -4,22 +4,12 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    //jcenter()
     mavenCentral()
-    maven {
-        name = "minecraft"
-        url "https://libraries.minecraft.net"
-    }
-    maven {
-        name = "juanmuscaria"
-        url "https://github.com/juanmuscaria/maven/raw/master"
-    }
-    maven { url "http://nexus.hc.to/content/repositories/pub_releases" }
-    maven { url "https://hub.spigotmc.org/nexus/content/groups/public/" }
+    maven { url "https://github.com/juanmuscaria/maven/raw/master" }
     maven { url "https://repo.md-5.net/content/repositories/snapshots/" }
-    maven { url "https://repo.md-5.net/content/repositories/releases/" }
-    maven { url "http://repo.dmulloy2.net/content/groups/public/" }
-    maven { url "https://repo.maven.apache.org/maven2" }
+
+    maven { url "https://libraries.minecraft.net" }
 }
 group = 'io.github.juanmuscaria'
 version = '0.0.0'

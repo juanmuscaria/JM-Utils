@@ -7,8 +7,6 @@ import org.bukkit.plugin.Plugin;
 import java.io.InputStream;
 import java.lang.reflect.Method;
 
-//Não use isso para injetar classes com classes ocultas (blablabla.class$classOculta), ele não consegue identificar essas classes.
-@SuppressWarnings("UnstableApiUsage")
 final class InjectionUtils {
     private static final Method defineClass;
 
