@@ -1,5 +1,9 @@
-package io.github.juanmuscaria.jmutils.minecraft;
+package io.github.juanmuscaria.jmutils;
 
+import com.sun.jna.Native;
+import io.github.juanmuscaria.jmutils.discord.game.DiscordGameSDK;
+import io.github.juanmuscaria.jmutils.discord.rcp.DiscordRCP;
+import io.github.juanmuscaria.jmutils.minecraft.UserIdent;
 import io.github.juanmuscaria.jmutils.utils.Reflection;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +16,8 @@ import java.util.Objects;
  */
 public final class Implementations {
     private static UserIdent userIdentImp;
+    private static DiscordGameSDK discordGameSDK;
+    private static DiscordRCP discordRCP;
 
     //Seal class.
     private Implementations() {
@@ -38,6 +44,21 @@ public final class Implementations {
     public static UserIdent getUserIdentImp() {
         if (userIdentImp == null) throw new IllegalStateException("No implementation has been registered yet.");
         return userIdentImp;
+    }
+
+    public static DiscordGameSDK getDiscordGameSDK(){
+        if (discordGameSDK != null)return discordGameSDK;
+        discordGameSDK = Native.load("discord_game_sdk", DiscordGameSDK.class);
+        return discordGameSDK;
+    }
+
+    public static DiscordRCP getDiscordRCP(){
+        if (discordRCP != null)return discordRCP;
+        discordRCP = Native.load("discord-rpc", DiscordRCP.class);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+
+        }));
+        return discordRCP;
     }
 
     public static boolean hasForge(){
