@@ -1,19 +1,24 @@
 package io.github.juanmuscaria.jmutils.minecraft.bukkit;
 
+import com.google.common.annotations.Beta;
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandMap;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
+import org.reflections.Reflections;
+import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+
+import static org.reflections.ReflectionUtils.*;
 
 /**
  * A versatile command manager.
@@ -46,6 +51,46 @@ public final class CommandManager {
         config.reloadConfig();
     }
 
+    @Beta
+    public void findAndRegisterCommands() throws CommandProcessorException {
+        Reflections reflections = new Reflections(new ConfigurationBuilder().addClassLoader(plugin.getClass().getClassLoader()));
+        Set<Class<?>> classes = reflections.getTypesAnnotatedWith(RegisterCommand.class);
+        for (Class<?> aClass : classes) {
+            try {
+                registerCommand(aClass);
+            } catch (CommandProcessorException e) {
+                throw new CommandProcessorException("An error occurred while registering the command " + aClass.getName(), e);
+            }
+        }
+    }
+
+    /**
+     * Register a command.
+     * Ff there are no settings it will generate new settings.
+     * If the command is disabled in the settings it will not be registered.
+     *
+     * @param command The command to register.
+     */
+    @SuppressWarnings("unchecked")
+    public void registerCommand(Class<?> command) throws CommandProcessorException {
+        if (!command.isAnnotationPresent(RegisterCommand.class))
+            throw new CommandProcessorException("Commands must have the RegisterCommand annotation.\n" + command.getName());
+        try {
+            RegisterCommand registerCommand = command.getAnnotation(RegisterCommand.class);
+            Object commandInstance = command.newInstance();
+            CommandContainer commandContainer = new CommandContainer(commandInstance,registerCommand);
+            if (registerCommand.tabCompleter().length > 0)commandContainer.tabCompleter = (TabCompleter) registerCommand.tabCompleter()[0].newInstance();
+            commandContainer.executor = getAllMethods(command,withAnnotation(RegisterCommand.Executor.class),
+                    withParameters(CommandSender.class, Command.class, String.class, String[].class)).iterator().next();
+            if (commandContainer.executor == null)throw new CommandProcessorException("Could not find any executor in target command");
+            commandContainer.help = getAllMethods(command,withAnnotation(RegisterCommand.HelpMessage.class),
+                    withParameters(CommandSender.class)).iterator().next();
+
+
+        } catch (Exception e) {
+            throw new CommandProcessorException("An error occurred while registering the command " + command.getName(), e);
+        }
+    }
 
     /**
      * Register a command.
@@ -156,4 +201,79 @@ public final class CommandManager {
         config.save();
     }
 
+    //Generates the settings for the command.
+    private void generateConfigForCommand(CommandContainer command) {
+        String name = command.getClass().getSimpleName();
+        YamlConfiguration yaml = config.getYaml();
+        if (!yaml.contains("commands." + name + ".enable"))
+            yaml.set("commands." + name + ".enable", true);
+        if (!yaml.contains("commands." + name + ".label"))
+            yaml.set("commands." + name + ".label", command.label);
+        if (!yaml.contains("commands." + name + ".aliases"))
+            yaml.set("commands." + name + ".aliases", command.aliases);
+        if (!yaml.contains("commands." + name + ".description"))
+            yaml.set("commands." + name + ".description", command.description);
+        if (!yaml.contains("commands." + name + ".permissionMessage"))
+            yaml.set("commands." + name + ".permissionMessage", command.permissionMessage);
+        if (!yaml.contains("commands." + name + ".permissionNode"))
+            yaml.set("commands." + name + ".permissionNode", command.permissionNode);
+        command.label = yaml.getString("commands." + name + ".label");
+        command.aliases = yaml.getStringList("commands." + name + ".aliases");
+        command.description = yaml.getString("commands." + name + ".description");
+        command.permissionMessage = yaml.getString("commands." + name + ".permissionMessage");
+        command.permissionNode = yaml.getString("commands." + name + ".permissionNode");
+        config.save();
+    }
+
+    private static class CommandContainer implements CommandExecutor {
+        String label;
+        List<String> aliases;
+        String description;
+        String permissionMessage;
+        String permissionNode;
+        TabCompleter tabCompleter;
+        Method executor;
+        Method help;
+        Object commandObj;
+
+        CommandContainer(Object commandObj,RegisterCommand annotation) {
+            this.commandObj = commandObj;
+            label = annotation.label();
+            aliases = Arrays.asList(annotation.aliases());
+            description = annotation.description();
+            permissionMessage = annotation.permissionMessage();
+            permissionNode = annotation.permissionNode();
+        }
+
+        @Override
+        public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+            try {
+                if (!(boolean) executor.invoke(commandObj, sender, command, label, args) && help != null)
+                    help.invoke(commandObj, sender);
+            } catch (Exception e){
+                new CommandExecutionException("An error occurred while executing the command " + label,e).printStackTrace();
+            }
+            return true;
+        }
+    }
+
+    private static class CommandProcessorException extends Exception {
+        CommandProcessorException(String reason) {
+            super(reason);
+        }
+
+        CommandProcessorException(String reason, Exception ex) {
+            super(reason, ex);
+        }
+    }
+
+    private static class CommandExecutionException extends Exception {
+        CommandExecutionException(String reason) {
+            super(reason);
+        }
+
+        CommandExecutionException(String reason, Exception ex) {
+            super(reason, ex);
+        }
+    }
 }
