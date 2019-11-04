@@ -1,4 +1,4 @@
-package io.github.juanmuscaria.jmutils.minecraft.bukkit;
+package io.github.juanmuscaria.jmutils.minecraft.bukkit.commands;
 
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;

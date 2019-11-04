@@ -54,4 +54,16 @@ public final class Utils {
     public static String[] getNamesFromEnum(Class<? extends Enum<?>> e) {
         return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
     }
+
+    public static boolean parseBoolean(Object object){
+        if (object == null)return false;
+        if (object instanceof Boolean)return (boolean) object;
+        if (object instanceof String)return Boolean.parseBoolean((String) object);
+        try {
+            int value = (int) object;
+            return value == 1;
+        } catch (ClassCastException e){
+            return false;
+        }
+    }
 }
