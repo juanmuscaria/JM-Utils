@@ -10,9 +10,11 @@ public class DiscordUser extends Structure {
     public String username;
     public String discriminator;
     public String avatar;
+
     public DiscordUser() {
         super();
     }
+
     protected List<String> getFieldOrder() {
         return Arrays.asList("userId", "username", "discriminator", "avatar");
     }

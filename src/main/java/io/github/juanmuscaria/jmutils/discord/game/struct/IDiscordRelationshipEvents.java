@@ -20,13 +20,13 @@ public class IDiscordRelationshipEvents extends Structure {
         super();
     }
 
-	public IDiscordRelationshipEvents(on_refresh_callback on_refresh, on_relationship_update_callback on_relationship_update) {
+    public IDiscordRelationshipEvents(on_refresh_callback on_refresh, on_relationship_update_callback on_relationship_update) {
         super();
         this.on_refresh = on_refresh;
         this.on_relationship_update = on_relationship_update;
     }
 
-	public IDiscordRelationshipEvents(Pointer peer) {
+    public IDiscordRelationshipEvents(Pointer peer) {
         super(peer);
     }
 
@@ -46,7 +46,7 @@ public class IDiscordRelationshipEvents extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordRelationshipEvents implements Structure.ByValue {
+    public static class ByValue extends IDiscordRelationshipEvents implements Structure.ByValue {
 
     }
 

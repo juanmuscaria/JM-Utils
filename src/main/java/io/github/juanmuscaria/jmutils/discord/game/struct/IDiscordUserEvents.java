@@ -19,7 +19,7 @@ public class IDiscordUserEvents extends Structure {
         super();
     }
 
-	public IDiscordUserEvents(on_current_user_update_callback on_current_user_update) {
+    public IDiscordUserEvents(on_current_user_update_callback on_current_user_update) {
         super();
         this.on_current_user_update = on_current_user_update;
     }
@@ -40,7 +40,7 @@ public class IDiscordUserEvents extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordUserEvents implements Structure.ByValue {
+    public static class ByValue extends IDiscordUserEvents implements Structure.ByValue {
 
     }
 

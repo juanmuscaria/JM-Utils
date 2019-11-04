@@ -23,7 +23,7 @@ public class IDiscordUserManager extends Structure {
         super();
     }
 
-	public IDiscordUserManager(get_current_user_callback get_current_user, get_user_callback get_user, get_current_user_premium_type_callback get_current_user_premium_type, current_user_has_flag_callback current_user_has_flag) {
+    public IDiscordUserManager(get_current_user_callback get_current_user, get_user_callback get_user, get_current_user_premium_type_callback get_current_user_premium_type, current_user_has_flag_callback current_user_has_flag) {
         super();
         this.get_current_user = get_current_user;
         this.get_user = get_user;
@@ -31,19 +31,19 @@ public class IDiscordUserManager extends Structure {
         this.current_user_has_flag = current_user_has_flag;
     }
 
-	public IDiscordUserManager(Pointer peer) {
+    public IDiscordUserManager(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("get_current_user", "get_user", "get_current_user_premium_type", "current_user_has_flag");
     }
 
-	public interface get_current_user_callback extends Callback {
+    public interface get_current_user_callback extends Callback {
         int apply(IDiscordUserManager manager, DiscordUser current_user);
     }
 
-	public interface get_user_callback_callback_callback extends Callback {
+    public interface get_user_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result, DiscordUser user);
     }
 
@@ -63,7 +63,7 @@ public class IDiscordUserManager extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordUserManager implements Structure.ByValue {
+    public static class ByValue extends IDiscordUserManager implements Structure.ByValue {
 
     }
 

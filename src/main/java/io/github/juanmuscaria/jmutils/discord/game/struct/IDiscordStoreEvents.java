@@ -20,13 +20,13 @@ public class IDiscordStoreEvents extends Structure {
         super();
     }
 
-	public IDiscordStoreEvents(on_entitlement_create_callback on_entitlement_create, on_entitlement_delete_callback on_entitlement_delete) {
+    public IDiscordStoreEvents(on_entitlement_create_callback on_entitlement_create, on_entitlement_delete_callback on_entitlement_delete) {
         super();
         this.on_entitlement_create = on_entitlement_create;
         this.on_entitlement_delete = on_entitlement_delete;
     }
 
-	public IDiscordStoreEvents(Pointer peer) {
+    public IDiscordStoreEvents(Pointer peer) {
         super(peer);
     }
 
@@ -46,7 +46,7 @@ public class IDiscordStoreEvents extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordStoreEvents implements Structure.ByValue {
+    public static class ByValue extends IDiscordStoreEvents implements Structure.ByValue {
 
     }
 

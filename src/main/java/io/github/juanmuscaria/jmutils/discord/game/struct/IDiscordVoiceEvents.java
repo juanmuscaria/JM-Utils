@@ -19,7 +19,7 @@ public class IDiscordVoiceEvents extends Structure {
         super();
     }
 
-	public IDiscordVoiceEvents(on_settings_update_callback on_settings_update) {
+    public IDiscordVoiceEvents(on_settings_update_callback on_settings_update) {
         super();
         this.on_settings_update = on_settings_update;
     }
@@ -40,7 +40,7 @@ public class IDiscordVoiceEvents extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordVoiceEvents implements Structure.ByValue {
+    public static class ByValue extends IDiscordVoiceEvents implements Structure.ByValue {
 
     }
 

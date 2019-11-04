@@ -13,15 +13,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Beta
 public final class UnsafeUtils {
-    private UnsafeUtils(){
-
-    }
-
     /**
      * An accessor for theUnsafe.
      */
     public static final Reflection.FieldAccessor<Unsafe> unsafeAccessor = Reflection.getField(Unsafe.class, "theUnsafe", Unsafe.class);
 
+    private UnsafeUtils() {
+
+    }
 
     /**
      * Create an instance of the class without calling any constructors.
@@ -111,9 +110,10 @@ public final class UnsafeUtils {
             }
         }
 
-        public long getAddress(){
+        public long getAddress() {
             return baseAddress;
         }
+
         private void checkBounds(long index) {
             if (index < 0 || index > (size - 1)) throw new ArrayIndexOutOfBoundsException("index " + index);
         }

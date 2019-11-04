@@ -92,35 +92,42 @@ public interface DiscordGameSDK extends Library {
         int DiscordUserFlag_HypeSquadHouse2 = 128;
         int DiscordUserFlag_HypeSquadHouse3 = 256;
     }
+
     interface EDiscordPremiumType {
         int DiscordPremiumType_None = 0;
         int DiscordPremiumType_Tier1 = 1;
         int DiscordPremiumType_Tier2 = 2;
     }
+
     interface EDiscordImageType {
         int DiscordImageType_User = 0;
     }
+
     interface EDiscordActivityType {
         int DiscordActivityType_Playing = 0;
         int DiscordActivityType_Streaming = 1;
         int DiscordActivityType_Listening = 2;
         int DiscordActivityType_Watching = 3;
     }
+
     interface EDiscordActivityActionType {
         int DiscordActivityActionType_Join = 1;
         int DiscordActivityActionType_Spectate = 2;
     }
+
     interface EDiscordActivityJoinRequestReply {
         int DiscordActivityJoinRequestReply_No = 0;
         int DiscordActivityJoinRequestReply_Yes = 1;
         int DiscordActivityJoinRequestReply_Ignore = 2;
     }
+
     interface EDiscordStatus {
         int DiscordStatus_Offline = 0;
         int DiscordStatus_Online = 1;
         int DiscordStatus_Idle = 2;
         int DiscordStatus_DoNotDisturb = 3;
     }
+
     interface EDiscordRelationshipType {
         int DiscordRelationshipType_None = 0;
         int DiscordRelationshipType_Friend = 1;
@@ -129,10 +136,12 @@ public interface DiscordGameSDK extends Library {
         int DiscordRelationshipType_PendingOutgoing = 4;
         int DiscordRelationshipType_Implicit = 5;
     }
+
     interface EDiscordLobbyType {
         int DiscordLobbyType_Private = 1;
         int DiscordLobbyType_Public = 2;
     }
+
     interface EDiscordLobbySearchComparison {
         int DiscordLobbySearchComparison_LessThanOrEqual = -2;
         int DiscordLobbySearchComparison_LessThan = -1;
@@ -141,16 +150,19 @@ public interface DiscordGameSDK extends Library {
         int DiscordLobbySearchComparison_GreaterThanOrEqual = 2;
         int DiscordLobbySearchComparison_NotEqual = 3;
     }
+
     interface EDiscordLobbySearchCast {
         int DiscordLobbySearchCast_String = 1;
         int DiscordLobbySearchCast_Number = 2;
     }
+
     interface EDiscordLobbySearchDistance {
         int DiscordLobbySearchDistance_Local = 0;
         int DiscordLobbySearchDistance_Default = 1;
         int DiscordLobbySearchDistance_Extended = 2;
         int DiscordLobbySearchDistance_Global = 3;
     }
+
     interface EDiscordEntitlementType {
         int DiscordEntitlementType_Purchase = 1;
         int DiscordEntitlementType_PremiumSubscription = 2;

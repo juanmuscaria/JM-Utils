@@ -30,59 +30,59 @@ public class IDiscordStorageManager extends Structure {
         super();
     }
 
-	public IDiscordStorageManager(Pointer peer) {
+    public IDiscordStorageManager(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("read", "read_async", "read_async_partial", "write", "write_async", "delete_", "exists", "count", "stat", "stat_at", "get_path");
     }
 
-	public interface read_callback extends Callback {
+    public interface read_callback extends Callback {
         int apply(IDiscordStorageManager manager, Pointer name, Pointer data, int data_length, IntByReference read);
     }
 
-	public interface read_async_callback_callback_callback extends Callback {
+    public interface read_async_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result, Pointer data, int data_length);
     }
 
-	public interface read_async_callback extends Callback {
+    public interface read_async_callback extends Callback {
         void apply(IDiscordStorageManager manager, Pointer name, Pointer callback_data, read_async_callback_callback_callback callback);
     }
 
-	public interface read_async_partial_callback_callback_callback extends Callback {
+    public interface read_async_partial_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result, Pointer data, int data_length);
     }
 
-	public interface read_async_partial_callback extends Callback {
+    public interface read_async_partial_callback extends Callback {
         void apply(IDiscordStorageManager manager, Pointer name, long offset, long length, Pointer callback_data, read_async_partial_callback_callback_callback callback);
     }
 
-	public interface write_callback extends Callback {
+    public interface write_callback extends Callback {
         int apply(IDiscordStorageManager manager, Pointer name, Pointer data, int data_length);
     }
 
-	public interface write_async_callback_callback_callback extends Callback {
+    public interface write_async_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result);
     }
 
-	public interface write_async_callback extends Callback {
+    public interface write_async_callback extends Callback {
         void apply(IDiscordStorageManager manager, Pointer name, Pointer data, int data_length, Pointer callback_data, write_async_callback_callback_callback callback);
     }
 
-	public interface delete__callback extends Callback {
+    public interface delete__callback extends Callback {
         int apply(IDiscordStorageManager manager, Pointer name);
     }
 
-	public interface exists_callback extends Callback {
+    public interface exists_callback extends Callback {
         int apply(IDiscordStorageManager manager, Pointer name, Pointer exists);
     }
 
-	public interface count_callback extends Callback {
+    public interface count_callback extends Callback {
         void apply(IDiscordStorageManager manager, IntByReference count);
     }
 
-	public interface stat_callback extends Callback {
+    public interface stat_callback extends Callback {
         int apply(IDiscordStorageManager manager, Pointer name, DiscordFileStat stat);
     }
 
@@ -98,7 +98,7 @@ public class IDiscordStorageManager extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordStorageManager implements Structure.ByValue {
+    public static class ByValue extends IDiscordStorageManager implements Structure.ByValue {
 
     }
 

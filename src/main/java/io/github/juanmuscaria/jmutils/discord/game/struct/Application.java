@@ -14,7 +14,8 @@ public class Application extends Structure {
     public IDiscordApplicationManager application;
     public IDiscordLobbyManager lobbies;
     public DiscordUser user;
+
     protected List<String> getFieldOrder() {
-    return Arrays.asList("core","users","achievements","activities","relationships","application","lobbies","user");
+        return Arrays.asList("core", "users", "achievements", "activities", "relationships", "application", "lobbies", "user");
     }
 }

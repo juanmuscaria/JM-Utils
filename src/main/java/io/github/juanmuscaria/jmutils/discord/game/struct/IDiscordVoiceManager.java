@@ -28,47 +28,47 @@ public class IDiscordVoiceManager extends Structure {
         super();
     }
 
-	public IDiscordVoiceManager(Pointer peer) {
+    public IDiscordVoiceManager(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("get_input_mode", "set_input_mode", "is_self_mute", "set_self_mute", "is_self_deaf", "set_self_deaf", "is_local_mute", "set_local_mute", "get_local_volume", "set_local_volume");
     }
 
-	public interface get_input_mode_callback extends Callback {
+    public interface get_input_mode_callback extends Callback {
         int apply(IDiscordVoiceManager manager, DiscordInputMode input_mode);
     }
 
-	public interface set_input_mode_callback_callback_callback extends Callback {
+    public interface set_input_mode_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result);
     }
 
-	public interface set_input_mode_callback extends Callback {
+    public interface set_input_mode_callback extends Callback {
         void apply(IDiscordVoiceManager manager, DiscordInputMode.ByValue input_mode, Pointer callback_data, set_input_mode_callback_callback_callback callback);
     }
 
-	public interface is_self_mute_callback extends Callback {
+    public interface is_self_mute_callback extends Callback {
         int apply(IDiscordVoiceManager manager, Pointer mute);
     }
 
-	public interface set_self_mute_callback extends Callback {
+    public interface set_self_mute_callback extends Callback {
         int apply(IDiscordVoiceManager manager, byte mute);
     }
 
-	public interface is_self_deaf_callback extends Callback {
+    public interface is_self_deaf_callback extends Callback {
         int apply(IDiscordVoiceManager manager, Pointer deaf);
     }
 
-	public interface set_self_deaf_callback extends Callback {
+    public interface set_self_deaf_callback extends Callback {
         int apply(IDiscordVoiceManager manager, byte deaf);
     }
 
-	public interface is_local_mute_callback extends Callback {
+    public interface is_local_mute_callback extends Callback {
         int apply(IDiscordVoiceManager manager, long user_id, Pointer mute);
     }
 
-	public interface set_local_mute_callback extends Callback {
+    public interface set_local_mute_callback extends Callback {
         int apply(IDiscordVoiceManager manager, long user_id, byte mute);
     }
 
@@ -84,7 +84,7 @@ public class IDiscordVoiceManager extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordVoiceManager implements Structure.ByValue {
+    public static class ByValue extends IDiscordVoiceManager implements Structure.ByValue {
 
     }
 

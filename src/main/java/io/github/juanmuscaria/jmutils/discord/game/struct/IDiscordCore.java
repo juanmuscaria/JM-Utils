@@ -33,67 +33,67 @@ public class IDiscordCore extends Structure {
         super();
     }
 
-	public IDiscordCore(Pointer peer) {
+    public IDiscordCore(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("destroy", "run_callbacks", "set_log_hook", "get_application_manager", "get_user_manager", "get_image_manager", "get_activity_manager", "get_relationship_manager", "get_lobby_manager", "get_network_manager", "get_overlay_manager", "get_storage_manager", "get_store_manager", "get_voice_manager", "get_achievement_manager");
     }
 
-	public interface destroy_callback extends Callback {
+    public interface destroy_callback extends Callback {
         void apply(IDiscordCore core);
     }
 
-	public interface run_callbacks_callback extends Callback {
+    public interface run_callbacks_callback extends Callback {
         int apply(IDiscordCore core);
     }
 
-	public interface set_log_hook_callback_hook_callback extends Callback {
+    public interface set_log_hook_callback_hook_callback extends Callback {
         void apply(Pointer hook_data, int level, Pointer message);
     }
 
-	public interface set_log_hook_callback extends Callback {
+    public interface set_log_hook_callback extends Callback {
         void apply(IDiscordCore core, int min_level, Pointer hook_data, set_log_hook_callback_hook_callback hook);
     }
 
-	public interface get_application_manager_callback extends Callback {
+    public interface get_application_manager_callback extends Callback {
         IDiscordApplicationManager apply(IDiscordCore core);
     }
 
-	public interface get_user_manager_callback extends Callback {
+    public interface get_user_manager_callback extends Callback {
         IDiscordUserManager apply(IDiscordCore core);
     }
 
-	public interface get_image_manager_callback extends Callback {
+    public interface get_image_manager_callback extends Callback {
         IDiscordImageManager apply(IDiscordCore core);
     }
 
-	public interface get_activity_manager_callback extends Callback {
+    public interface get_activity_manager_callback extends Callback {
         IDiscordActivityManager apply(IDiscordCore core);
     }
 
-	public interface get_relationship_manager_callback extends Callback {
+    public interface get_relationship_manager_callback extends Callback {
         IDiscordRelationshipManager apply(IDiscordCore core);
     }
 
-	public interface get_lobby_manager_callback extends Callback {
+    public interface get_lobby_manager_callback extends Callback {
         IDiscordLobbyManager apply(IDiscordCore core);
     }
 
-	public interface get_network_manager_callback extends Callback {
+    public interface get_network_manager_callback extends Callback {
         IDiscordNetworkManager apply(IDiscordCore core);
     }
 
-	public interface get_overlay_manager_callback extends Callback {
+    public interface get_overlay_manager_callback extends Callback {
         IDiscordOverlayManager apply(IDiscordCore core);
     }
 
-	public interface get_storage_manager_callback extends Callback {
+    public interface get_storage_manager_callback extends Callback {
         IDiscordStorageManager apply(IDiscordCore core);
     }
 
-	public interface get_store_manager_callback extends Callback {
+    public interface get_store_manager_callback extends Callback {
         IDiscordStoreManager apply(IDiscordCore core);
     }
 
@@ -109,7 +109,7 @@ public class IDiscordCore extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordCore implements Structure.ByValue {
+    public static class ByValue extends IDiscordCore implements Structure.ByValue {
 
     }
 

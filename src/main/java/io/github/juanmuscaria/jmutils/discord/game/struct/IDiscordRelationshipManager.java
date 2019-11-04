@@ -23,7 +23,7 @@ public class IDiscordRelationshipManager extends Structure {
         super();
     }
 
-	public IDiscordRelationshipManager(filter_callback filter, IDiscordStorageManager.count_callback count, get_callback get, get_at_callback get_at) {
+    public IDiscordRelationshipManager(filter_callback filter, IDiscordStorageManager.count_callback count, get_callback get, get_at_callback get_at) {
         super();
         this.filter = filter;
         this.count = count;
@@ -31,19 +31,19 @@ public class IDiscordRelationshipManager extends Structure {
         this.get_at = get_at;
     }
 
-	public IDiscordRelationshipManager(Pointer peer) {
+    public IDiscordRelationshipManager(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("filter", "count", "get", "get_at");
     }
 
-	public interface filter_callback_filter_callback extends Callback {
+    public interface filter_callback_filter_callback extends Callback {
         byte apply(Pointer filter_data, DiscordRelationship relationship);
     }
 
-	public interface filter_callback extends Callback {
+    public interface filter_callback extends Callback {
         void apply(IDiscordRelationshipManager manager, Pointer filter_data, filter_callback_filter_callback filter);
     }
 
@@ -63,7 +63,7 @@ public class IDiscordRelationshipManager extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordRelationshipManager implements Structure.ByValue {
+    public static class ByValue extends IDiscordRelationshipManager implements Structure.ByValue {
 
     }
 

@@ -29,55 +29,55 @@ public class IDiscordStoreManager extends Structure {
         super();
     }
 
-	public IDiscordStoreManager(Pointer peer) {
+    public IDiscordStoreManager(Pointer peer) {
         super(peer);
     }
 
-	protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder() {
         return Arrays.asList("fetch_skus", "count_skus", "get_sku", "get_sku_at", "fetch_entitlements", "count_entitlements", "get_entitlement", "get_entitlement_at", "has_sku_entitlement", "start_purchase");
     }
 
-	public interface fetch_skus_callback_callback_callback extends Callback {
+    public interface fetch_skus_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result);
     }
 
-	public interface fetch_skus_callback extends Callback {
+    public interface fetch_skus_callback extends Callback {
         void apply(IDiscordStoreManager manager, Pointer callback_data, fetch_skus_callback_callback_callback callback);
     }
 
-	public interface count_skus_callback extends Callback {
+    public interface count_skus_callback extends Callback {
         void apply(IDiscordStoreManager manager, IntByReference count);
     }
 
-	public interface get_sku_callback extends Callback {
+    public interface get_sku_callback extends Callback {
         int apply(IDiscordStoreManager manager, long sku_id, DiscordSku sku);
     }
 
-	public interface get_sku_at_callback extends Callback {
+    public interface get_sku_at_callback extends Callback {
         int apply(IDiscordStoreManager manager, int index, DiscordSku sku);
     }
 
-	public interface fetch_entitlements_callback_callback_callback extends Callback {
+    public interface fetch_entitlements_callback_callback_callback extends Callback {
         void apply(Pointer callback_data, int result);
     }
 
-	public interface fetch_entitlements_callback extends Callback {
+    public interface fetch_entitlements_callback extends Callback {
         void apply(IDiscordStoreManager manager, Pointer callback_data, fetch_entitlements_callback_callback_callback callback);
     }
 
-	public interface count_entitlements_callback extends Callback {
+    public interface count_entitlements_callback extends Callback {
         void apply(IDiscordStoreManager manager, IntByReference count);
     }
 
-	public interface get_entitlement_callback extends Callback {
+    public interface get_entitlement_callback extends Callback {
         int apply(IDiscordStoreManager manager, long entitlement_id, DiscordEntitlement entitlement);
     }
 
-	public interface get_entitlement_at_callback extends Callback {
+    public interface get_entitlement_at_callback extends Callback {
         int apply(IDiscordStoreManager manager, int index, DiscordEntitlement entitlement);
     }
 
-	public interface has_sku_entitlement_callback extends Callback {
+    public interface has_sku_entitlement_callback extends Callback {
         int apply(IDiscordStoreManager manager, long sku_id, Pointer has_entitlement);
     }
 
@@ -93,7 +93,7 @@ public class IDiscordStoreManager extends Structure {
 
     }
 
-	public static class ByValue extends IDiscordStoreManager implements Structure.ByValue {
+    public static class ByValue extends IDiscordStoreManager implements Structure.ByValue {
 
     }
 

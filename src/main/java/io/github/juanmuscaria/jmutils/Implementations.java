@@ -46,14 +46,14 @@ public final class Implementations {
         return userIdentImp;
     }
 
-    public static DiscordGameSDK getDiscordGameSDK(){
-        if (discordGameSDK != null)return discordGameSDK;
+    public static DiscordGameSDK getDiscordGameSDK() {
+        if (discordGameSDK != null) return discordGameSDK;
         discordGameSDK = Native.load("discord_game_sdk", DiscordGameSDK.class);
         return discordGameSDK;
     }
 
-    public static DiscordRCP getDiscordRCP(){
-        if (discordRCP != null)return discordRCP;
+    public static DiscordRCP getDiscordRCP() {
+        if (discordRCP != null) return discordRCP;
         discordRCP = Native.load("discord-rpc", DiscordRCP.class);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 
@@ -61,23 +61,23 @@ public final class Implementations {
         return discordRCP;
     }
 
-    public static boolean hasForge(){
+    public static boolean hasForge() {
         return Reflection.doesClassExist("net.minecraftforge.common.ForgeVersion");
     }
 
-    public static boolean hasMCPCPlus(){
+    public static boolean hasMCPCPlus() {
         return Reflection.doesClassExist("za.co.mcportcentral.MCPCHooks");
     }
 
-    public static boolean hasCauldron(){
+    public static boolean hasCauldron() {
         return Reflection.doesClassExist("net.minecraftforge.cauldron.CauldronUtils");
     }
 
-    public static boolean hasThermos(){
+    public static boolean hasThermos() {
         return Reflection.doesClassExist("thermos.Thermos");
     }
 
-    public static boolean hasBukkit(){
+    public static boolean hasBukkit() {
         return Reflection.doesClassExist("org.bukkit.Bukkit");
     }
 

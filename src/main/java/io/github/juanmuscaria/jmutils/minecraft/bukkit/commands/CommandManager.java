@@ -77,18 +77,20 @@ public final class CommandManager {
                 throw new CommandException.CommandProcessorException("Commands must have the RegisterCommand annotation.\n" + command.getName());
             RegisterCommand registerCommand = command.getAnnotation(RegisterCommand.class);
             Object commandInstance = command.newInstance();
-            CommandContainer commandContainer = new CommandContainer(commandInstance,registerCommand);
-            if (registerCommand.tabCompleter().length > 0)commandContainer.tabCompleter = (TabCompleter) registerCommand.tabCompleter()[0].newInstance();
+            CommandContainer commandContainer = new CommandContainer(commandInstance, registerCommand);
+            if (registerCommand.tabCompleter().length > 0)
+                commandContainer.tabCompleter = (TabCompleter) registerCommand.tabCompleter()[0].newInstance();
             try {
-                commandContainer.executor = getAllMethods(command,withAnnotation(RegisterCommand.Executor.class),
+                commandContainer.executor = getAllMethods(command, withAnnotation(RegisterCommand.Executor.class),
                         withParameters(CommandSender.class, Command.class, String.class, String[].class)).iterator().next();
             } catch (NoSuchElementException e) {
                 throw new CommandException.CommandProcessorException("Could not find any executor in target command");
             }
             try {
-                commandContainer.help = getAllMethods(command,withAnnotation(RegisterCommand.HelpMessage.class),
+                commandContainer.help = getAllMethods(command, withAnnotation(RegisterCommand.HelpMessage.class),
                         withParameters(CommandSender.class)).iterator().next();
-            } catch (NoSuchElementException ignored) {}
+            } catch (NoSuchElementException ignored) {
+            }
             String name = command.getSimpleName();
             YamlConfiguration yaml = config.getYaml();
             generateConfigForCommand(commandContainer);
@@ -152,8 +154,8 @@ public final class CommandManager {
     /**
      * Register a CommandExecutor.
      *
-     * @param command Command label.
-     * @param executor Command Executor.
+     * @param command      Command label.
+     * @param executor     Command Executor.
      * @param tabCompleter Tab Completer, can be null.
      * @deprecated Deprecado, use o novo sistema para registrar comandos.
      */
@@ -267,7 +269,7 @@ public final class CommandManager {
         Method help;
         Object commandObj;
 
-        CommandContainer(Object commandObj,RegisterCommand annotation) {
+        CommandContainer(Object commandObj, RegisterCommand annotation) {
             this.commandObj = commandObj;
             label = annotation.label();
             aliases = Arrays.asList(annotation.aliases());
@@ -277,12 +279,12 @@ public final class CommandManager {
         }
 
         @Override
-        public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
+        public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
             try {
                 if (Utils.parseBoolean(executor.invoke(commandObj, sender, command, label, args)) && help != null)
                     help.invoke(commandObj, sender);
-            } catch (Exception e){
-                new CommandException.CommandExecutionException("An error occurred while executing the command " + label,e).printStackTrace();
+            } catch (Exception e) {
+                new CommandException.CommandExecutionException("An error occurred while executing the command " + label, e).printStackTrace();
             }
             return true;
         }
