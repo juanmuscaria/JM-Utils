@@ -20,7 +20,7 @@ public final class ConfigYaml {
      * @param configFile The file that will be used.
      */
     public ConfigYaml(File configFile) {
-        this.configFile = Objects.requireNonNull(configFile,"Config file cannot be null.");
+        this.configFile = Objects.requireNonNull(configFile, "Config file cannot be null.");
         reloadConfig();
     }
 
@@ -64,11 +64,11 @@ public final class ConfigYaml {
      *
      * @return The Configuration File.
      */
-    public File getFile(){
+    public File getFile() {
         return configFile;
     }
 
-    public void resetData(){
+    public void resetData() {
         yamlConfiguration = new YamlConfiguration();
         try {
             yamlConfiguration.save(configFile);

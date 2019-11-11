@@ -42,16 +42,16 @@ public abstract class WrappedLogger {
             this.level = level;
         }
 
-        public int getLevel() {
-            return level;
-        }
-
-        public static LogLevel valueOf(int level){
+        public static LogLevel valueOf(int level) {
             try {
                 return LogLevel.values()[level];
-            } catch (ArrayIndexOutOfBoundsException e){
+            } catch (ArrayIndexOutOfBoundsException e) {
                 return LogLevel.INFO;
             }
+        }
+
+        public int getLevel() {
+            return level;
         }
     }
 
