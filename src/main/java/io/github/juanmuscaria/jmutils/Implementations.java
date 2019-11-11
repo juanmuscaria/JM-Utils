@@ -3,6 +3,7 @@ package io.github.juanmuscaria.jmutils;
 import com.sun.jna.Native;
 import io.github.juanmuscaria.jmutils.discord.game.DiscordGameSDK;
 import io.github.juanmuscaria.jmutils.discord.rcp.DiscordRCP;
+import io.github.juanmuscaria.jmutils.minecraft.IForgeBridge;
 import io.github.juanmuscaria.jmutils.minecraft.UserIdent;
 import io.github.juanmuscaria.jmutils.utils.Reflection;
 import org.jetbrains.annotations.NotNull;
@@ -16,11 +17,34 @@ import java.util.Objects;
  */
 public final class Implementations {
     private static UserIdent userIdentImp;
+    private static IForgeBridge forgeBridge;
     private static DiscordGameSDK discordGameSDK;
     private static DiscordRCP discordRCP;
 
     //Seal class.
     private Implementations() {
+    }
+
+    /**
+     * Register an implementation of IForgeBridge before using it.
+     * If an implementation has already been registered it will be ignored.
+     *
+     * @param iForgeBridge An object of a IForgeBridge implementation.
+     */
+    public static void registerImplementation(@NotNull IForgeBridge iForgeBridge) {
+        if (forgeBridge == null) forgeBridge = Objects.requireNonNull(iForgeBridge);
+    }
+
+    /**
+     * Get an implementation of IForgeBridge.
+     *
+     * @return An object of a IForgeBridge implementation.
+     * @throws IllegalStateException In case no implementation has been registered.
+     */
+    @NotNull
+    public static IForgeBridge getForgeBridge() {
+        if (forgeBridge == null) throw new IllegalStateException("No implementation has been registered yet.");
+        return forgeBridge;
     }
 
     /**
@@ -30,8 +54,7 @@ public final class Implementations {
      * @param userIdent An object of a UserIndent implementation.
      */
     public static void registerImplementation(@NotNull UserIdent userIdent) {
-        Objects.requireNonNull(userIdent);
-        if (userIdentImp != null) userIdentImp = userIdent;
+        if (userIdentImp == null) userIdentImp = Objects.requireNonNull(userIdent);
     }
 
     /**
@@ -56,7 +79,7 @@ public final class Implementations {
         if (discordRCP != null) return discordRCP;
         discordRCP = Native.load("discord-rpc", DiscordRCP.class);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-
+            discordRCP.Discord_Shutdown();
         }));
         return discordRCP;
     }
