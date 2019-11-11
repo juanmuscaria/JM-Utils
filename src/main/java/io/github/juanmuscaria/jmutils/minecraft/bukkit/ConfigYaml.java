@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * A simple wrapper for bukkit YamlConfiguration api.
@@ -19,7 +20,7 @@ public final class ConfigYaml {
      * @param configFile The file that will be used.
      */
     public ConfigYaml(File configFile) {
-        this.configFile = configFile;
+        this.configFile = Objects.requireNonNull(configFile,"Config file cannot be null.");
         reloadConfig();
     }
 
@@ -36,7 +37,7 @@ public final class ConfigYaml {
      * Saves the configuration file to disk.
      */
     public void save() {
-        if (yamlConfiguration == null || configFile == null) {
+        if (yamlConfiguration == null) {
             return;
         }
         try {
@@ -56,6 +57,23 @@ public final class ConfigYaml {
             reloadConfig();
         }
         return yamlConfiguration;
+    }
 
+    /**
+     * Get the Configuration File.
+     *
+     * @return The Configuration File.
+     */
+    public File getFile(){
+        return configFile;
+    }
+
+    public void resetData(){
+        yamlConfiguration = new YamlConfiguration();
+        try {
+            yamlConfiguration.save(configFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
