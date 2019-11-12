@@ -1,6 +1,10 @@
 package io.github.juanmuscaria.jmutils.minecraft;
 
-public interface IForgeBridge {
+/** A bridge to communicate with things from Forge (Server).
+ *
+ * @author juanmuscaria
+ */
+public interface IServerForgeBridge {
     /**
      * Checks if a player is a FakePlayer.
      *
@@ -33,7 +37,6 @@ public interface IForgeBridge {
      * @throws IllegalArgumentException If the player parameter is not an instance of EntityPlayerMP.
      */
     void closeOpenScreen(Object player);
-
 
     /**
      * Checks if the player has an open container

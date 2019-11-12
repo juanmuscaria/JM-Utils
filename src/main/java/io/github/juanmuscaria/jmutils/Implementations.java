@@ -3,7 +3,8 @@ package io.github.juanmuscaria.jmutils;
 import com.sun.jna.Native;
 import io.github.juanmuscaria.jmutils.discord.game.DiscordGameSDK;
 import io.github.juanmuscaria.jmutils.discord.rcp.DiscordRCP;
-import io.github.juanmuscaria.jmutils.minecraft.IForgeBridge;
+import io.github.juanmuscaria.jmutils.minecraft.ICommonForgeBridge;
+import io.github.juanmuscaria.jmutils.minecraft.IServerForgeBridge;
 import io.github.juanmuscaria.jmutils.minecraft.UserIdent;
 import io.github.juanmuscaria.jmutils.utils.Reflection;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +18,8 @@ import java.util.Objects;
  */
 public final class Implementations {
     private static UserIdent userIdentImp;
-    private static IForgeBridge forgeBridge;
+    private static IServerForgeBridge serverForgeBridge;
+    private static ICommonForgeBridge commonForgeBridge;
     private static DiscordGameSDK discordGameSDK;
     private static DiscordRCP discordRCP;
 
@@ -29,10 +31,10 @@ public final class Implementations {
      * Register an implementation of IForgeBridge before using it.
      * If an implementation has already been registered it will be ignored.
      *
-     * @param iForgeBridge An object of a IForgeBridge implementation.
+     * @param iServerForgeBridge An object of a IForgeBridge implementation.
      */
-    public static void registerImplementation(@NotNull IForgeBridge iForgeBridge) {
-        if (forgeBridge == null) forgeBridge = Objects.requireNonNull(iForgeBridge);
+    public static void registerImplementation(@NotNull IServerForgeBridge iServerForgeBridge) {
+        if (serverForgeBridge == null) serverForgeBridge = Objects.requireNonNull(iServerForgeBridge);
     }
 
     /**
@@ -42,9 +44,31 @@ public final class Implementations {
      * @throws IllegalStateException In case no implementation has been registered.
      */
     @NotNull
-    public static IForgeBridge getForgeBridge() {
-        if (forgeBridge == null) throw new IllegalStateException("No implementation has been registered yet.");
-        return forgeBridge;
+    public static IServerForgeBridge getServerForgeBridge() {
+        if (serverForgeBridge == null) throw new IllegalStateException("No implementation has been registered yet.");
+        return serverForgeBridge;
+    }
+
+    /**
+     * Register an implementation of IForgeBridge before using it.
+     * If an implementation has already been registered it will be ignored.
+     *
+     * @param iCommonForgeBridge An object of a IForgeBridge implementation.
+     */
+    public static void registerImplementation(@NotNull ICommonForgeBridge iCommonForgeBridge) {
+        if (commonForgeBridge == null) commonForgeBridge = Objects.requireNonNull(iCommonForgeBridge);
+    }
+
+    /**
+     * Get an implementation of IForgeBridge.
+     *
+     * @return An object of a IForgeBridge implementation.
+     * @throws IllegalStateException In case no implementation has been registered.
+     */
+    @NotNull
+    public static ICommonForgeBridge getCommonForgeBridge() {
+        if (commonForgeBridge == null) throw new IllegalStateException("No implementation has been registered yet.");
+        return commonForgeBridge;
     }
 
     /**
