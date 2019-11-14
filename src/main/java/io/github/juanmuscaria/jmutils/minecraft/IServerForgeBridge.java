@@ -1,6 +1,7 @@
 package io.github.juanmuscaria.jmutils.minecraft;
 
-/** A bridge to communicate with things from Forge (Server).
+/**
+ * A bridge to communicate with things from Forge (Server).
  *
  * @author juanmuscaria
  */

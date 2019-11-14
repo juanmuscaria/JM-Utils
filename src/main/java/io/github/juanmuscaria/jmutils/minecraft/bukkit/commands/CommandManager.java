@@ -65,7 +65,7 @@ public final class CommandManager {
 
     /**
      * Register a command.
-     * Ff there are no settings it will generate new settings.
+     * If there are no settings it will generate new settings.
      * If the command is disabled in the settings it will not be registered.
      *
      * @param command The command to register.

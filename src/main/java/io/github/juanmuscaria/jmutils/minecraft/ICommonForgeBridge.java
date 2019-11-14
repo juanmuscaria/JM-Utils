@@ -1,11 +1,13 @@
 package io.github.juanmuscaria.jmutils.minecraft;
 
-/** A bridge to communicate with things from Forge (Common).
+/**
+ * A bridge to communicate with things from Forge (Common).
  *
  * @author juanmuscaria
  */
 public interface ICommonForgeBridge {
-    /** Checks if an item is banned.
+    /**
+     * Checks if an item is banned.
      *
      * @param itemStack An ItemStack to verify.
      * @return True if the item is banned.
