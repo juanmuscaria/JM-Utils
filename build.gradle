@@ -14,7 +14,7 @@ repositories {
 group = 'io.github.juanmuscaria'
 version = '0.0.0'
 
-description = "A multipurpose library."
+description = "Let's nuke the jvm."
 dependencies {
 
     compileOnly 'org.jetbrains:annotations:16.0.2'

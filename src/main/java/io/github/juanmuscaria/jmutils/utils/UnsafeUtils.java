@@ -1,7 +1,6 @@
 package io.github.juanmuscaria.jmutils.utils;
 
 import com.google.common.annotations.Beta;
-import org.jetbrains.annotations.Nullable;
 import sun.misc.Unsafe;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -27,22 +26,15 @@ public final class UnsafeUtils {
      *
      * @param clazz The class to instantiate.
      * @param <T>   Object type.
-     * @return A wrapped object. The wrapped object may be null if it is not possible to instantiate the object.
+     * @return The object instance.
      */
     @SuppressWarnings("unchecked")
-    public static <T> WrappedObject<T> createInstance(Class<T> clazz) {
-        T object = null;
+    public static <T> T createInstance(Class<T> clazz) {
         try {
-            object = (T) unsafeAccessor.get(null).allocateInstance(clazz);
-        } catch (InstantiationException ignored) {
+            return (T) unsafeAccessor.get(null).allocateInstance(clazz);
+        } catch (InstantiationException e) {
+            throw new IllegalStateException(e);
         }
-        T finalObject = object;
-        return () -> finalObject;
-    }
-
-    private interface WrappedObject<T> {
-        @Nullable
-        T get();
     }
 
     /**
@@ -54,6 +46,10 @@ public final class UnsafeUtils {
         private final long size;
         private AtomicBoolean isFinalized = new AtomicBoolean(false);
 
+        public UnsafeByteArray(long pointer, long size) {
+            this.size = size;
+            baseAddress = pointer;
+        }
         /**
          * Creates a new UnsafeByteArray.
          *
@@ -70,11 +66,11 @@ public final class UnsafeUtils {
          * @param index The index to set the value.
          * @param value The value to set.
          * @throws ArrayIndexOutOfBoundsException If you try to access an out of bounds index.
-         * @throws IllegalStateException          If the memory used by the object has been freed.
+         * @throws IllegalStateException          If the memory used by the byte array has been freed.
          */
         public void set(long index, byte value) {
             if (isFinalized.get())
-                throw new IllegalStateException("The allocated memory of this object has already been freed.");
+                throw new IllegalStateException("The allocated memory of this byte array has already been freed.");
             checkBounds(index);
             unsafeAccessor.get(null).putByte(baseAddress + index, value);
         }
@@ -85,11 +81,11 @@ public final class UnsafeUtils {
          * @param index The index to get the value.
          * @return The value contained in this index.
          * @throws ArrayIndexOutOfBoundsException If you try to access an out of bounds index.
-         * @throws IllegalStateException          If the memory used by the object has been freed.
+         * @throws IllegalStateException          If the memory used by the byte array has been freed.
          */
         public byte get(long index) {
             if (isFinalized.get())
-                throw new IllegalStateException("The allocated memory of this object has already been freed.");
+                throw new IllegalStateException("The allocated memory of this byte array has already been freed.");
             checkBounds(index);
             return unsafeAccessor.get(null).getByte(baseAddress + index);
         }
@@ -100,7 +96,7 @@ public final class UnsafeUtils {
 
 
         /**
-         * Free memory allocated by this object.
+         * Free memory allocated by this byte array.
          * Must be called when this object is no longer used.
          */
         public void freeMemory() {
