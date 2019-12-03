@@ -50,6 +50,7 @@ public final class UnsafeUtils {
             this.size = size;
             baseAddress = pointer;
         }
+
         /**
          * Creates a new UnsafeByteArray.
          *
