@@ -104,7 +104,8 @@ public final class CommandManager {
                 pluginCommand.setPermissionMessage(commandContainer.permissionMessage);
                 pluginCommand.setDescription(commandContainer.description);
                 pluginCommand.setExecutor(commandContainer);
-                pluginCommand.setTabCompleter(commandContainer.tabCompleter);
+                if (commandContainer.tabCompleter != null)
+                    pluginCommand.setTabCompleter(commandContainer.tabCompleter); //Bukkit não tem null check nisso!
                 Field commandMapField = Bukkit.getPluginManager().getClass().getDeclaredField("commandMap");
                 commandMapField.setAccessible(true);
                 CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getPluginManager());
