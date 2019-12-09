@@ -6,7 +6,8 @@ plugins {
 repositories {
     //jcenter()
     mavenCentral()
-    maven { url "https://github.com/juanmuscaria/maven/raw/master" }
+    mavenLocal()
+    //maven { url "https://github.com/juanmuscaria/maven/raw/master" }
     maven { url "https://repo.md-5.net/content/repositories/snapshots/" }
 
     maven { url "https://libraries.minecraft.net" }
